@@ -1,11 +1,11 @@
 import ArticleCard from './ArticleCard';
 
-const CardList = () => {
+const CardList = ({ allArticles }: any) => {
   return (
     <div className='grid lg:grid-cols-3 p-4 gap-4'>
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
+      {allArticles.map((article: any) => (
+        <ArticleCard key={article.id} article={article} />
+      ))}
     </div>
   );
 };

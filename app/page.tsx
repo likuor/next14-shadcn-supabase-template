@@ -1,24 +1,20 @@
 import CardList from '@/components/feature/card/CardList';
 
-const notifications = [
-  {
-    title: 'Your call has been confirmed.',
-    description: '1 hour ago',
-  },
-  {
-    title: 'You have a new message!',
-    description: '1 hour ago',
-  },
-  {
-    title: 'Your subscription is expiring soon!',
-    description: '2 hours ago',
-  },
-];
+const fetchAllArticles = async () => {
+  const res = await fetch(process.env.NEXT_PUBLIC_WORDPRESS_API_URL || '', {
+    // const res = await fetch('http://localhost:3001/api/post', {
+    cache: 'no-store',
+  });
+  const articles = await res.json();
+  return articles;
+};
 
-export default function Home() {
+export default async function Home() {
+  const allArticles = await fetchAllArticles();
+
   return (
     <main>
-      <CardList />
+      <CardList allArticles={allArticles} />
     </main>
   );
 }
